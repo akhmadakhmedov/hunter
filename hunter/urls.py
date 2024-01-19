@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import *
+from worker.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,7 @@ urlpatterns = [
     path('address/', address, name='address'),
     path('vacancies/', vacancy_list, name='vacancies'),
     path('address/', address, name='address'),
+    path('companies/', company_list, name='companies'),
+    path('workers/', worker_list, name='workers'),
 
 ]

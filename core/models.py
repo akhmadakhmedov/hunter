@@ -12,3 +12,13 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.title
+
+class Company(models.Model):
+    name = models.CharField(max_length=55)
+    address = models.TextField(default='Not mentioned')
+    quantity = models.IntegerField()
+    is_hunting = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
