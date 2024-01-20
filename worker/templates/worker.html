@@ -1,0 +1,17 @@
+<h2>Individual Worker Details</h2>
+<ul>
+    <ol>Login : {{ worker.user.username }}</ol>
+    <ol>Name : {{ worker.name }}</ol>
+    <ol>Spesialisation: {{ worker.specialisation }}</ol>
+    <ol>Expected Salary : {{ worker.expected_salary }}</ol>
+    <ol>Is searching : {{ worker.is_searching }}</ol>
+</ul>
+
+<h2>Interested vacancies</h2>
+{% for v in worker.vacancy_set.all %}
+    <div>{{ v.title }}</div>
+{% endfor %}
+<hr>
+{% for v in vacancies %}
+    <div>{{ v.title }}</div>
+{% endfor %}
