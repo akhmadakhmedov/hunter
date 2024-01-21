@@ -1,5 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+All Companies
+{% endblock %}
+{% block content %}
 <h1>Company List</h1>
 
 {% for company in companies %}
     <div>{{ company.name }}</div>
 {% endfor %}
+{% endlock %}

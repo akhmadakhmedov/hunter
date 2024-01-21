@@ -36,12 +36,15 @@ class Comment(models.Model):
 class Resume(models.Model):
     worker = models.ForeignKey(
         to = Worker,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True, blank=True
     )
-    name = models.CharField(max_length=55)
-    surname = models.CharField(max_length=55)
-    age = models.IntegerField()
-    experience_year = models.IntegerField()
+    title = models.CharField(max_length=55)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
-        return self.name
+        return self.title
+
+

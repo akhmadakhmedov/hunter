@@ -13,17 +13,34 @@ class Vacancy(models.Model):
         to = Worker,
         blank=True
     )
-
-
+    category = models.ForeignKey(
+        to = 'Category',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name='kategoriya'
+    )
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Vakansiya'
+        verbose_name_plural = 'Vakansiii'
+        ordering = ['salary']
 
 class Company(models.Model):
     name = models.CharField(max_length=55)
     address = models.TextField(default='Not mentioned')
     quantity = models.IntegerField()
     is_hunting = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    name = models.CharField(null=True, max_length=55)
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name

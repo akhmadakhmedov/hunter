@@ -21,7 +21,7 @@ from worker.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage),
+    path('', homepage, name='home'),
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
     path('address/', address, name='address'),

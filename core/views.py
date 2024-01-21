@@ -6,7 +6,7 @@ def homepage(request):
 
 
 def about(request):
-    return HttpResponse("About us info's")
+    return render(request, 'about.html')
 
 
 def contact(request):
@@ -30,5 +30,8 @@ def company_list(request):
     companies = Company.objects.all()
     context = {"companies": companies}
     return render(request, 'companies.html', context)
+
+def candidates(request):
+    return render(request, 'candidates.html')
 
 
