@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Add Resume
+{% endblock %}
+
+{% block content %}
+    <form method = 'POST'>
+        {% csrf_token %}
+        <input type="text" name="form-title">
+        <textarea name="form-text" cols="20" rows="5"></textarea>
+        <button>Add</button>
+
+    </form>
+{% endblock %}

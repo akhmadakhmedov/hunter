@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Individual Resume Details</h1>
+
+<h2>{{ resume.title }}</h2>
+<p>{{ resume.text }}</p>
+<p>{{ resume.created_at }}</p>
+
+{% endblock %}

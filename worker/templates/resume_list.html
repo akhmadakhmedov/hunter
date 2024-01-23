@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+All Resumes
+{% endblock %}
+{% block content %}
+<h1>Resumes</h1>
+
+{% for resume in resume_list %}
+    <div><a href="/resume-info/{{ resume.id }}">{{ resume.title }}</a></div>
+{% endfor %}
+{% endblock %}
