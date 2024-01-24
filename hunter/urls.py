@@ -27,6 +27,7 @@ urlpatterns = [
     path('address/', address, name='address'),
     path('vacancies/', vacancy_list, name='vacancies'),
     path('vacancy/<int:id>/', vacancy_detail, name='vacancy-info'),
+    path('add-vacancy/', add_vacancy, name='add-vacancy'),
     path('address/', address, name='address'),
     path('companies/', company_list, name='companies'),
     path('workers/', worker_list, name='workers'),
@@ -35,6 +36,8 @@ urlpatterns = [
     path('resume-info/<int:id>/', resume_info, name='resume_info'),
     path('my-resume/', my_resume, name='my-resume'),
     path('add-resume/', add_resume, name='add-resume'),
+    path('edit-resume/<int:id>/', edit_resume, name='edit-resume'),
     path('search/', search, name='search'),
+    path('registration/', reg_view, name='reg'),
 
 ]

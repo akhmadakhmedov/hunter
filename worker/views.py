@@ -47,3 +47,18 @@ def add_resume(request):
         new_resume.save()
         return HttpResponse('New resume added')
 
+
+def edit_resume(request, id):
+    if request.method == 'GET':
+        return render(request, 'edit_resume.html')
+    elif request.method == 'POST':
+        resume_object = Resume.objects.get(id=id)
+        edited_resume = resume_object
+        edited_resume.title = request.POST['edit-title']
+        edited_resume.text = request.POST['edit-text']
+        edited_resume.save()
+        return render(request, 'resume_detail.html')
+
+
+
+

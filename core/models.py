@@ -7,7 +7,7 @@ class Vacancy(models.Model):
     salary = models.IntegerField(null=True, blank=True)
     description = models.TextField(default='No info yet')
     is_relevant = models.BooleanField(default=True)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
     contacts = models.CharField(max_length=100, verbose_name='Konakty')
     candidates = models.ManyToManyField(
         to = Worker,

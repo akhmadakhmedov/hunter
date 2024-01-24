@@ -1,5 +1,6 @@
 from django.shortcuts import HttpResponse, render
 from .models import Vacancy, Company
+from django.contrib.auth.models import User
 
 def homepage(request):
     return render(request, 'index.html')
@@ -33,6 +34,20 @@ def vacancy_detail(request, id):
                "candidates_list": candidates}
     return render(request, 'vacancy_page.html', context)
 
+
+def add_vacancy(request):
+    if request.method == 'GET':
+        return render(request, 'vacancy_add.html')
+    elif request.method == 'POST':
+        new_vacancy = Vacancy()
+        new_vacancy.worker = request.user.worker
+        new_vacancy.title = request.POST["form-title"]
+        new_vacancy.salary = request.POST["form-salary"]
+        new_vacancy.description = request.POST["form-text"]
+        new_vacancy.contact = request.POST['form-contact']
+        new_vacancy.save()
+        return HttpResponse('New vacancy added')
+
 def company_list(request):
     companies = Company.objects.all()
     context = {"companies": companies}
@@ -48,3 +63,17 @@ def search(request):
     return render(request, 'vacancies.html', context)
 
 
+
+def reg_view(request):
+    if request.method == "POST":
+        user = User(
+            username = request.POST['username']
+        )
+        user.save()
+        user.set_password(request.POST['password'])
+        user.save()
+        return HttpResponse('ready')
+
+
+
+    return render(request, 'auth/registr.html')
