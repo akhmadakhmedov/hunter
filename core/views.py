@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse, render, redirect
 from .models import Vacancy, Company
 from django.contrib.auth.models import User
+from .forms import VacancyForm
 
 def homepage(request):
     return render(request, 'index.html')
@@ -25,14 +26,14 @@ def address(request):
 def vacancy_list(request):
     vacancies = Vacancy.objects.all()
     context = {"vacancies": vacancies}
-    return render(request, 'vacancies.html', context)
+    return render(request, 'vacancy/vacancies.html', context)
 
 def vacancy_detail(request, id):
     vacancy_object = Vacancy.objects.get(id=id)  #1 id
     candidates = vacancy_object.candidates.all()  #list
     context = {'vacancy': vacancy_object,
                "candidates_list": candidates}
-    return render(request, 'vacancy_page.html', context)
+    return render(request, 'vacancy/vacancy_page.html', context)
 
 
 def add_vacancy(request):
@@ -46,7 +47,20 @@ def add_vacancy(request):
         )
         new_vacancy.save()
         return redirect(f'/vacancy/{new_vacancy.id}/')
-    return render(request, 'vacancy_add.html')
+    return render(request, 'vacancy/vacancy_add.html')
+
+
+def add_vacancy_df(request):
+    if request.method == "POST":
+        #adding new info's from the user
+        vacancy_form = VacancyForm(request.POST)
+        if vacancy_form.is_valid():
+            new_vacancy = vacancy_form.save()
+            return redirect(f'/vacancy/{new_vacancy.id}/')
+    vacancy_form = VacancyForm()
+    return render(request,
+                  'vacancy/vacancy_add_df.html',
+                  {"vacancy_form": vacancy_form})
 
 
 def vacancy_edit(request, id):
@@ -59,7 +73,7 @@ def vacancy_edit(request, id):
         vacancy.contact = request.POST["contact"]
         vacancy.save()
         return redirect(f'/vacancy/{vacancy.id}/')
-    return render(request, 'vacancy_edit_form.html', {"vacancy": vacancy})
+    return render(request, 'vacancy/vacancy_edit_form.html', {"vacancy": vacancy})
 
 def company_list(request):
     companies = Company.objects.all()

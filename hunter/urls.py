@@ -28,6 +28,7 @@ urlpatterns = [
     path('vacancies/', vacancy_list, name='vacancies'),
     path('vacancy/<int:id>/', vacancy_detail, name='vacancy-info'),
     path('add-vacancy/', add_vacancy, name='add-vacancy'),
+    path('add-vacancy-df/', add_vacancy_df, name='add-vacancy-df'),
     path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),
     path('address/', address, name='address'),
     path('companies/', company_list, name='companies'),
