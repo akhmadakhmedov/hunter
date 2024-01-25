@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, render, redirect
 from .models import Vacancy, Company
 from django.contrib.auth.models import User
 
@@ -36,17 +36,30 @@ def vacancy_detail(request, id):
 
 
 def add_vacancy(request):
-    if request.method == 'GET':
-        return render(request, 'vacancy_add.html')
-    elif request.method == 'POST':
-        new_vacancy = Vacancy()
-        new_vacancy.worker = request.user.worker
-        new_vacancy.title = request.POST["form-title"]
-        new_vacancy.salary = request.POST["form-salary"]
-        new_vacancy.description = request.POST["form-text"]
-        new_vacancy.contact = request.POST['form-contact']
+    if request.method == "POST":
+        new_vacancy = Vacancy(
+            title = request.POST["title"],
+            salary = int(request.POST["salary"]),
+            description = request.POST["description"],
+            email = request.POST["email"],
+            contacts = request.POST["contacts"]
+        )
         new_vacancy.save()
-        return HttpResponse('New vacancy added')
+        return redirect(f'/vacancy/{new_vacancy.id}/')
+    return render(request, 'vacancy_add.html')
+
+
+def vacancy_edit(request, id):
+    vacancy = Vacancy.objects.get(id=id)
+    if request.method == "POST":
+        vacancy.title = request.POST["title"]
+        vacancy.salary = int(request.POST["salary"])
+        vacancy.description = request.POST["description"]
+        vacancy.email = request.POST["email"]
+        vacancy.contact = request.POST["contact"]
+        vacancy.save()
+        return redirect(f'/vacancy/{vacancy.id}/')
+    return render(request, 'vacancy_edit_form.html', {"vacancy": vacancy})
 
 def company_list(request):
     companies = Company.objects.all()

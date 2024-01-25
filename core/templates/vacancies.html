@@ -8,4 +8,6 @@ All Vacancies
     {% for vacancy in vacancies %}
     <div><a href="{% url 'vacancy-info' vacancy.id %}">{{vacancy.title}} - {{ vacancy.salary }}</a></div>
     {% endfor %}
+
+
 {% endblock %}

@@ -6,6 +6,6 @@
 <p>{{ resume.text }}</p>
 <p>{{ resume.created_at }}</p>
 <hr>
-<a href="{% url 'edit-resume' id=id %}">Edit the Resume</a>
+<a href="{% url 'edit-resume' resume.id %}">Edit the Resume</a>
 
 {% endblock %}

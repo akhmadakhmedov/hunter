@@ -4,13 +4,13 @@ Add Vacancy
 {% endblock %}
 
 {% block content %}
-    <form method = 'POST'>
+    <form method="POST">
         {% csrf_token %}
-        <input type="text" name="form-title">
-        <input type="integer" name="form-salary">
-        <textarea name="form-text" cols="20" rows="5"></textarea>
-        <input type="text" name="form-contact">
+        <input type="text" name="title" placeholder = "title"><br><br>
+        <input type="number" name="salary" placeholder = "salary"><br><br>
+        <textarea name="description" cols="20" rows = "5" placeholder = "description"></textarea><br><br>
+        <input type="email" name="email" placeholder = "email"><br><br>
+        <input type="text" name="contacts" placeholder = "contacts"><br><br>
         <button>Add</button>
-
     </form>
 {% endblock %}

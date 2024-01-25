@@ -48,3 +48,5 @@ class Resume(models.Model):
         return self.title
 
 
+
+

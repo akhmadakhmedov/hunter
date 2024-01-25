@@ -27,6 +27,7 @@ class Vacancy(models.Model):
         verbose_name = 'Vakansiya'
         verbose_name_plural = 'Vakansiii'
         ordering = ['salary']
+        unique_together = [['title', 'email']]
 
 class Company(models.Model):
     name = models.CharField(max_length=55)
