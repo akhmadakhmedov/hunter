@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Worker, Resume
+from .forms import ResumeEditForm
 
 
 def worker_list(request):
@@ -18,19 +19,19 @@ def worker_info(request, id):
 def resume_list(request):
     resume_list = Resume.objects.all()
     context = {"resume_list": resume_list}
-    return render(request, 'resume_list.html', context)
+    return render(request, 'resume/resume_list.html', context)
 
 
 def resume_info(request, id):
     resume_object = Resume.objects.get(id=id)
     context = {"resume": resume_object}
-    return render(request, 'resume_detail.html', context)
+    return render(request, 'resume/resume_detail.html', context)
 
 def my_resume(request):
     if request.user.is_authenticated:
         resume_query = Resume.objects.filter(worker=request.user.worker)
         return render(
-            request, 'resume_list.html',
+            request, 'resume/resume_list.html',
             {"resumes": resume_query}
         )
     else:
@@ -38,7 +39,7 @@ def my_resume(request):
 
 def add_resume(request):
     if request.method == 'GET':
-        return render(request, 'resume_add.html')
+        return render(request, 'resume/resume_add.html')
     elif request.method == 'POST':
         new_resume = Resume()
         new_resume.worker = request.user.worker
@@ -56,8 +57,22 @@ def edit_resume(request, id):
         resume.save()
         return redirect(f'/resume-info/{resume.id}')
     return render(
-        request, 'edit_resume.html', {'resume': resume}
+        request, 'resume/edit_resume.html', {'resume': resume}
     )
+
+
+def edit_resume_df(request, id):
+    resume_object = Resume.objects.get(id=id)
+    if request.method == "GET":
+        form = ResumeEditForm(instance=resume_object)
+        return render(request, "resume/edit_resume_df.html", {"form": form})
+
+    elif request.method == "POST":
+        form = ResumeEditForm(data = request.POST, instance=resume_object)
+        if form.is_valid():
+            obj = form.save()
+            return redirect(resume_info, id=obj.id )
+        return HttpResponse("Not VALID CREDENTIALS")
 
 
 
