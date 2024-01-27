@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Company List</h2>
+    {% for company in companies %}
+        <div><a href="{% url 'company-info' company.id %}">{{company.name}} - {{ company.city }}</a></div>
+    {% endfor %}
+
+{% endblock %}

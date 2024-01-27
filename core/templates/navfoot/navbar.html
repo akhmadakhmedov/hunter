@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Homepage</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'companies' %}">Companies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'workers' %}">Candidates</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add-company' %}">Add Company</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vacancies</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'vacancies' %}">Vacancy List</a></li>
+                <li><a class="dropdown-item" href="{% url 'add-vacancy' %}">Add Vacancy</a></li>
+                <li><a class="dropdown-item" href="{% url 'add-vacancy-df' %}">Add Vacancy DJ FORM</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'resume_list' %}">Resumes</a>
+            </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'my-resume' %}">My Resume</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'add-resume-df' %}">Add Resume</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Sign out</a>
+                </li>
+                Hello, {{ request.user.username }}!
+             {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="">Registration</a>Please sign in
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Sign in</a>
+                </li>
+             {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>

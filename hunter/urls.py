@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from core.views import *
 from worker.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,17 +32,22 @@ urlpatterns = [
     path('add-vacancy/', add_vacancy, name='add-vacancy'),
     path('add-vacancy-df/', add_vacancy_df, name='add-vacancy-df'),
     path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),
+    path('vacancy-edit-df/<int:id>/', vacancy_edit_df, name='vacancy-edit-df'),
     path('address/', address, name='address'),
     path('companies/', company_list, name='companies'),
+    path('company-list/', company_list, name='companies'),
+    path('company/<int:id>', company_detail, name='company-info'),
+    path('add-company', add_company, name='add-company'),
+    path('company-edit/<int:id>', company_edit, name='company-edit'),
     path('workers/', worker_list, name='workers'),
     path('worker/<int:id>/', worker_info, name='worker_info'),
     path('resume-list/', resume_list, name='resume_list'),
     path('resume-info/<int:id>/', resume_info, name='resume_info'),
     path('my-resume/', my_resume, name='my-resume'),
     path('add-resume/', add_resume, name='add-resume'),
+    path('add-resume-df/', add_resume_df, name='add-resume-df'),
     path('edit-resume/<int:id>/', edit_resume, name='edit-resume'),
     path('edit-resume_df/<int:id>/', edit_resume_df, name='edit-resume-df'),
     path('search/', search, name='search'),
     path('registration/', reg_view, name='reg'),
-
-]
+] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

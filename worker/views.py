@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .models import Worker, Resume
-from .forms import ResumeEditForm
+from .models import Worker, Resume, Company
+from .forms import ResumeEditForm, AddResumeForm, CompanyForm, CompanyEditForm
 
 
 def worker_list(request):
@@ -48,6 +48,19 @@ def add_resume(request):
         new_resume.save()
         return HttpResponse('New resume added')
 
+def add_resume_df(request):
+    if request.method == "GET":
+        resume_form = AddResumeForm()
+        return render(request, 'resume/resume_add_df.html', {"resume_form": resume_form})
+    elif request.method == "POST":
+        #adding new resume details from the user
+        resume_form = AddResumeForm(request.POST)
+        if resume_form.is_valid():
+            new_resume = resume_form.save()
+            return redirect(f'/resume/{new_resume.id}/')
+
+
+
 
 def edit_resume(request, id):
     resume = Resume.objects.get(id=id)
@@ -75,5 +88,41 @@ def edit_resume_df(request, id):
         return HttpResponse("Not VALID CREDENTIALS")
 
 
+def company_list(request):
+    companies = Company.objects.all()
+    context = {"companies": companies}
+    return render(request, 'company/company.html', context)
 
+def add_company(request):
+    if request.method == "POST":
+        #adding new compay info
+        company_form = CompanyForm(request.POST)
+        if company_form.is_valid():
+            company_form.save()
+            return HttpResponse("SAVEEDDD")
+
+    company_form = CompanyForm()
+    return render(request,
+                      'company/add_company.html',
+                      {"company_form": company_form})
+
+
+def company_detail(request, id):
+    company_object = Company.objects.get(id=id)  # 1 id
+    #workers = company_object.candidates.all()  # list
+    #context = {'company_object': company_object,
+               #"candidates_list": candidates}
+    return render(request, 'company/company_detail.html', {"company_object": company_object})
+
+def company_edit(request, id):
+    company_object = Company.objects.get(id=id)
+    if request.method == "GET":
+        form = CompanyEditForm(instance=company_object)
+        return render(request, 'company/company_edit.html', {"form": form})
+    elif request.method == "POST":
+        form = CompanyEditForm(data=request.POST, instance=company_object)
+        if form.is_valid():
+            obj = form.save()
+            return redirect(company_detail, id=obj.id)
+        return HttpResponse("Not good")
 

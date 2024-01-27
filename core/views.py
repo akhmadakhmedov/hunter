@@ -1,7 +1,7 @@
 from django.shortcuts import HttpResponse, render, redirect
 from .models import Vacancy, Company
 from django.contrib.auth.models import User
-from .forms import VacancyForm
+from .forms import VacancyForm, VacancyEditForm
 
 def homepage(request):
     return render(request, 'index.html')
@@ -74,6 +74,19 @@ def vacancy_edit(request, id):
         vacancy.save()
         return redirect(f'/vacancy/{vacancy.id}/')
     return render(request, 'vacancy/vacancy_edit_form.html', {"vacancy": vacancy})
+
+def vacancy_edit_df(request, id):
+    vacancy_object = Vacancy.objects.get(id=id)
+    if request.method == "GET":
+        form = VacancyEditForm(instance=vacancy_object)
+        return render(request, 'vacancy/vacancy_edit_df.html', {"form": form})
+    elif request.method == "POST":
+        form = VacancyEditForm(data = request.POST, instance=vacancy_object)
+        if form.is_valid():
+            obj = form.save()
+            return redirect(vacancy_detail, id=obj.id)
+        return HttpResponse("Not good")
+
 
 def company_list(request):
     companies = Company.objects.all()

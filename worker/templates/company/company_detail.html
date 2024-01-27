@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Company Detail Page</h2>
+
+    <h4>Company Name: {{ company_object.name }}</h4>
+    <p>Company Located City: {{ company_object.city }}</p>
+    <p>Companies CEO: {{ company_object.ceo }}</p>
+    <p>Founded date: {{ company_object.created_date }}</p>
+
+
+    <hr>
+
+    <a href="{% url 'company-edit' company_object.id %}">Edit via FORMS</a>
+
+
+{% endblock %}

@@ -48,5 +48,18 @@ class Resume(models.Model):
         return self.title
 
 
+class Company(models.Model):
+    name = models.CharField(max_length=55)
+    city = models.CharField(max_length=55)
+    ceo = models.CharField(max_length=55)
+    created_date = models.DateTimeField(auto_now_add=True)
+    worker = models.ManyToManyField(
+        to = Worker,
+        null=True,
+        blank=True,
+        related_name='company'
+    )
 
+    def __str__(self):
+        return self.name
 
