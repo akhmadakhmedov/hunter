@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 {% block content %}
+
 
     <form method="POST">
         {% csrf_token %}
-        {{ resume_form.as_p }}
+        {% bootstrap_form resume_form %}
         <button>Save</button>
     </form>
 

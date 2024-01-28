@@ -4,13 +4,33 @@ Add Vacancy
 {% endblock %}
 
 {% block content %}
+
     <form method="POST">
         {% csrf_token %}
-        <input type="text" name="title" placeholder = "title"><br><br>
-        <input type="number" name="salary" placeholder = "salary"><br><br>
-        <textarea name="description" cols="20" rows = "5" placeholder = "description"></textarea><br><br>
-        <input type="email" name="email" placeholder = "email"><br><br>
-        <input type="text" name="contacts" placeholder = "contacts"><br><br>
-        <button>Add</button>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="title" type="text" class="form-control" id="title">
+      </div>
+
+      <div class="mb-3">
+        <label for="salary" class="form-label">Salary</label>
+        <input name="salary" type="number" class="form-control" id="salary">
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+          <textarea name="description" class="form-control" id="description"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+
+      <div class="mb-3">
+        <label for="contacts" class="form-label">Contact</label>
+        <input name="contacts" type="text" class="form-control" id="contacts">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 {% endblock %}

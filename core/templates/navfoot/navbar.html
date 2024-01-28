@@ -20,6 +20,14 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'add-company' %}">Add Company</a>
             </li>
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'vacancies' %}">Vacancies</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'add-vacancy' %}">Add Vacancy</a>
+              </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vacancies</a>
               <ul class="dropdown-menu">
@@ -44,10 +52,10 @@
                 Hello, {{ request.user.username }}!
              {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="">Registration</a>Please sign in
+                  <a class="nav-link" href="{% url 'reg' %}">Registration</a>Please sign in
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Sign in</a>
+                  <a class="nav-link" href="{% url 'sign-in' %}">Sign in</a>
                 </li>
              {% endif %}
           </ul>

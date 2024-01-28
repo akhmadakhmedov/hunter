@@ -21,7 +21,7 @@ from worker.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
-urlpatterns = [
+urlpatterns = ([
     path('admin/', admin.site.urls),
     path('', homepage, name='home'),
     path('about/', about, name='about'),
@@ -50,4 +50,7 @@ urlpatterns = [
     path('edit-resume_df/<int:id>/', edit_resume_df, name='edit-resume-df'),
     path('search/', search, name='search'),
     path('registration/', reg_view, name='reg'),
-] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    path('sign-in/', sign_in, name='sign-in'),
+
+]
+               + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT))

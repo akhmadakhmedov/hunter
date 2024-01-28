@@ -11,3 +11,4 @@ class VacancyEditForm(forms.ModelForm):
     class Meta:
         model = Vacancy
         fields = ['title', 'salary', 'description', 'email', 'contacts']
+
