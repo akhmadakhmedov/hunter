@@ -42,6 +42,11 @@ class Resume(models.Model):
     title = models.CharField(max_length=55)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
+    profile_photo = models.ImageField(
+        null=True, blank=True,
+        upload_to="profile_photo/",
+        verbose_name="Staffs photo"
+    )
 
 
     def __str__(self):
@@ -55,7 +60,6 @@ class Company(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     worker = models.ManyToManyField(
         to = Worker,
-        null=True,
         blank=True,
         related_name='company'
     )

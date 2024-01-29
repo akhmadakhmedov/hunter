@@ -3,6 +3,11 @@
 <h1>Individual Resume Details</h1>
 
 <h2>{{ resume.title }}</h2>
+ {% if resume.profile_photo %}
+    <div>
+        <img src="{{ resume.profile_photo.url }}" height="250px">
+    </div>
+{% endif %}
 <p>{{ resume.text }}</p>
 <p>{{ resume.created_at }}</p>
 <hr>

@@ -4,12 +4,12 @@ from .models import Resume, Company
 class ResumeEditForm(forms.ModelForm):
     class Meta:
         model = Resume
-        fields = ['title', 'text']
+        fields = ['title', 'text', 'profile_photo']
 
 class AddResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
-        fields = ['title', 'text']
+        fields = ['title', 'text', 'profile_photo']
 
 class CompanyForm(forms.ModelForm):
     class Meta:

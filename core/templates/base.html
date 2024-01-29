@@ -20,6 +20,17 @@
 </head>
 <body>
  {% include "navfoot/navbar.html" %}
+    <div>
+        <span>
+            <form method="GET" action="/search">
+                <input
+                        type="text"
+                        placeholder="Text here",
+                        name="keyword">
+                <button class="btn btn-warning">Search</button>
+            </form>
+        </span>
+    </div>
 <div class="container">
     {% block content %}
     {% endblock %}

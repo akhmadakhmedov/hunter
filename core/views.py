@@ -3,6 +3,7 @@ from .models import Vacancy, Company
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import VacancyForm, VacancyEditForm
+from .filters import VacancyFilter
 
 def homepage(request):
     return render(request, 'index.html')
@@ -25,8 +26,10 @@ def address(request):
 
 
 def vacancy_list(request):
-    vacancies = Vacancy.objects.all()
-    context = {"vacancies": vacancies}
+    #vacancies = Vacancy.objects.all()
+    vacancy_filter = VacancyFilter(request.GET, queryset=Vacancy.objects.all())
+    #context = {"vacancies": vacancies}
+    context = {"vacancy_filter": vacancy_filter}
     return render(request, 'vacancy/vacancies.html', context)
 
 def vacancy_detail(request, id):
@@ -99,9 +102,9 @@ def candidates(request):
 
 def search(request):
     word = request.GET['keyword']
-    vacancy_list = Vacancy.objects.filter(title__contains = word)
+    vacancy_list = Vacancy.objects.filter(title__icontains = word)
     context = {'vacancies': vacancy_list}
-    return render(request, 'vacancies.html', context)
+    return render(request, 'vacancy/vacancies.html', context)
 
 def sign_in(request):
     if request.method == 'POST':

@@ -5,7 +5,11 @@ All Vacancies
     {% block content %}
     <h1>Vacancy Page</h1>
     <hr>
-    {% for vacancy in vacancies %}
+    <form method="get">
+        {{ vacancy_filter.form.as_p }}
+        <input type="submit" />
+    </form>
+    {% for vacancy in vacancy_filter.qs %}
     <div><a href="{% url 'vacancy-info' vacancy.id %}">{{vacancy.title}} - {{ vacancy.salary }}</a></div>
     {% endfor %}
 
