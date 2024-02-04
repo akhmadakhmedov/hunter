@@ -3,6 +3,14 @@ from worker.models import Worker
 
 # Create your models here.
 class Vacancy(models.Model):
+    FULLTIME = 'FT'
+    PARTTIME = 'PT'
+    PROJECT_BASED = 'PB'
+    WORK_TYPE = [
+        (FULLTIME , "Fulltime"),
+        (PARTTIME , "Parttime"),
+        (PROJECT_BASED , "Project_based")
+    ]
     title = models.CharField(max_length=255)
     salary = models.IntegerField(null=True, blank=True)
     description = models.TextField(default='No info yet')
@@ -19,6 +27,10 @@ class Vacancy(models.Model):
         on_delete=models.SET_NULL,
         verbose_name='kategoriya'
     )
+    experience = models.IntegerField(null=True, blank=True, default=0)
+    work_type = models.CharField(max_length=55, choices=WORK_TYPE, default=FULLTIME)
+
+
 
     def __str__(self):
         return self.title
@@ -28,6 +40,12 @@ class Vacancy(models.Model):
         verbose_name_plural = 'Vakansiii'
         ordering = ['salary']
         unique_together = [['title', 'email']]
+
+
+class Skills(models.Model):
+    pass
+
+
 
 class Company(models.Model):
     name = models.CharField(max_length=55)

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>Recruiter - {{ recruiter_object.user.username }}</h2>
+    <div>City - {{ recruiter_object.city }}</div>
+    <div>Country: {{ recruiter_object.country | default_if_none:"Not defined"}}</div>
+    <div>Payment - {{ recruiter_object.payment_for_fund }}</div>
+    <hr>
+    <a href="{% url 'recruiter-edit' recruiter_object.id %}">Edit via FORMS</a>
+
+{% endblock %}

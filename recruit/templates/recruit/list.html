@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Recruiter</h2>
+
+{% for r in recruiters %}
+    <div>
+        <a href="{% url 'recruiter-detail' r.pk %}">{{ r.user.username }}</a>
+    </div>
+{% empty %}
+    <div>No any records yet</div>
+{% endfor %}
+
+{% endblock %}

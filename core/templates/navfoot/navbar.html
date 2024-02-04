@@ -21,13 +21,17 @@
               <a class="nav-link" href="{% url 'add-company' %}">Add Company</a>
             </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'vacancies' %}">Vacancies</a>
+
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Recruiter
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'recruiter-list' %}">Recruiters</a></li>
+                    <li><a class="dropdown-item" href="{% url 'create-recruiter' %}">Add Recruiter</a></li>
+                  </ul>
               </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'add-vacancy' %}">Add Vacancy</a>
-              </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vacancies</a>
               <ul class="dropdown-menu">

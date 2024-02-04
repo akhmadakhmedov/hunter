@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Worker, Resume, Company
 from .forms import ResumeEditForm, AddResumeForm, CompanyForm, CompanyEditForm
+from django.contrib.auth.decorators import login_required
 
 
 def worker_list(request):
@@ -37,6 +38,7 @@ def my_resume(request):
     else:
         return redirect('home')
 
+@login_required(login_url='sign-in')
 def add_resume(request):
     if request.method == 'GET':
         return render(request, 'resume/resume_add.html')
@@ -48,6 +50,7 @@ def add_resume(request):
         new_resume.save()
         return HttpResponse('New resume added')
 
+@login_required(login_url='sign-in')
 def add_resume_df(request):
     if request.method == "GET":
         resume_form = AddResumeForm()
@@ -58,8 +61,6 @@ def add_resume_df(request):
         if resume_form.is_valid():
             new_resume = resume_form.save()
             return redirect(f'/resume-info/{new_resume.id}/')
-
-
 
 
 def edit_resume(request, id):
